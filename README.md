@@ -61,3 +61,8 @@ mix test --cover
 mix credo
 mix dialyzer
 ```
+
+## TODO
+
+* [ ] [`exec` provider](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuration)
+* [ ] [`auth-provider` provider](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#option-1-oidc-authenticator)

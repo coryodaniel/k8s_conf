@@ -6,13 +6,14 @@ defprotocol K8s.Conf.RequestOptions do
   @typedoc """
   HTTP Request options
   """
-  @type t :: %{headers: list, ssl_options: list}
+  @type t :: %__MODULE__{headers: list(), ssl_options: keyword()}
   defstruct [:headers, :ssl_options]
 
-  @spec generate(struct) :: K8s.Conf.RequestOptions.t()
+  @spec generate(struct) :: K8s.Conf.RequestOptions.t() | nil
   def generate(auth)
 end
 
 defimpl K8s.Conf.RequestOptions, for: Any do
+  @spec generate(any()) :: nil
   def generate(_), do: nil
 end

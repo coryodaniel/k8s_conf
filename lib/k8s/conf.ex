@@ -10,7 +10,7 @@ defmodule K8s.Conf do
 
   @typep auth_t :: nil | struct
 
-  @type t :: %{
+  @type t :: %__MODULE__{
           cluster_name: String.t(),
           user_name: String.t(),
           url: String.t(),

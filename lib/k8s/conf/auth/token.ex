@@ -5,10 +5,10 @@ defmodule K8s.Conf.Auth.Token do
 
   @behaviour K8s.Conf.Auth
   defstruct [:token]
-  @type t :: %K8s.Conf.Auth.Token{token: binary}
+  @type t :: %__MODULE__{token: binary}
 
   @impl true
-  @spec create(map(), String.t()) :: K8s.Conf.Auth.Token.t()
+  @spec create(map() | any, String.t() | any) :: K8s.Conf.Auth.Token.t() | nil
   def create(%{"token" => token}, _), do: %K8s.Conf.Auth.Token{token: token}
 
   @impl true
@@ -24,7 +24,6 @@ defmodule K8s.Conf.Auth.Token do
 
   defimpl K8s.Conf.RequestOptions, for: __MODULE__ do
     @doc "Generates HTTP Authorization options for certificate authentication"
-    @spec generate(K8s.Conf.Auth.Token.t()) :: K8s.Conf.RequestOptions.t()
     def generate(%K8s.Conf.Auth.Token{token: token}) do
       %K8s.Conf.RequestOptions{
         headers: [{"Authorization", "Bearer #{token}"}],

@@ -6,7 +6,7 @@ defmodule K8s.Conf.Auth.Certificate do
   @behaviour K8s.Conf.Auth
   alias K8s.Conf
   alias K8s.Conf.PKI
-  @type t :: %K8s.Conf.Auth.Certificate{certificate: binary, key: binary}
+  @type t :: %__MODULE__{certificate: binary, key: binary}
   defstruct [:certificate, :key]
 
   @impl true
