@@ -64,10 +64,11 @@ defmodule K8s.Conf do
   [kubernetes.io :: Accessing the API from a Pod](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod)
   """
 
-  @spec from_service_account(nil | String.t()) :: K8s.Conf.t()
-  def from_service_account(nil),
+  @spec from_service_account() :: K8s.Conf.t()
+  def from_service_account(),
     do: from_service_account("/var/run/secrets/kubernetes.io/serviceaccount")
 
+  @spec from_service_account(String.t()) :: K8s.Conf.t()
   def from_service_account(root_sa_path) do
     host = System.get_env("KUBERNETES_SERVICE_HOST")
     port = System.get_env("KUBERNETES_SERVICE_PORT")

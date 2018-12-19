@@ -1,6 +1,13 @@
 # K8s.Conf
 
-Handles kubernetes config file parsing and HTTP request signing.
+[K8s.Conf](https://hexdocs.pm/k8s_conf/readme.html) parses Kubernetes config files and generates HTTP headers and options for authenticating to the Kubernetes API.
+
+[![Build Status](https://travis-ci.org/coryodaniel/k8s_conf.svg?branch=master)](https://travis-ci.org/coryodaniel/k8s_conf)
+[![Coverage Status](https://coveralls.io/repos/github/coryodaniel/k8s_conf/badge.svg?branch=master)](https://coveralls.io/github/coryodaniel/k8s_conf?branch=master)
+[![Hex.pm](http://img.shields.io/hexpm/v/k8s_conf.svg?style=flat)](https://hex.pm/packages/k8s_conf) 
+[![Documentation](https://img.shields.io/badge/documentation-on%20hexdocs-green.svg)](https://hexdocs.pm/k8s_conf/)
+![Hex.pm](https://img.shields.io/hexpm/l/k8s_conf.svg?style=flat)
+
 
 ## Installation
 
@@ -22,8 +29,6 @@ be found at [https://hexdocs.pm/k8s_conf](https://hexdocs.pm/k8s_conf).
 ## Usage
 
 ```elixir
-ops = []
-
 # Defaults to 'current-context', optionally set cluster, context, or user
 # opts = [
 #   user: "alt-user",
@@ -31,6 +36,7 @@ ops = []
 #   context: "alt-context"
 # ]
 
+opts = []
 config = K8s.Conf.from_file("~/.kube/config", opts)
 
 # Optionally load from a service account
@@ -53,16 +59,3 @@ Providers are checked in order, the first to return an authorization struct wins
 Custom providers are processed before default providers.
 
 See [Certicate](lib/k8s/conf/auth/certificate.ex) and [Token](lib/k8s/conf/auth/token.ex) for protocol and behavior implementations.
-
-## Testing
-
-```shell
-mix test --cover
-mix credo
-mix dialyzer
-```
-
-## TODO
-
-* [ ] [`exec` provider](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuration)
-* [ ] [`auth-provider` provider](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#option-1-oidc-authenticator)

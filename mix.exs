@@ -4,10 +4,23 @@ defmodule K8sConf.MixProject do
   def project do
     [
       app: :k8s_conf,
+      description: "k8s_conf parses Kubernetes config files and generates HTTP headers and options for authenticating to the Kubernetes API.",
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      docs: [
+        extras: ["README.md"],
+        main: "readme"
+      ],
+      package: package()
     ]
   end
 
@@ -27,7 +40,19 @@ defmodule K8sConf.MixProject do
       {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.19", only: :dev}
+      {:ex_doc, "~> 0.19", only: :dev},
+      {:excoveralls, "~> 0.10", only: :test}
+    ]
+  end
+
+  defp package do
+    [
+      name: :k8s_conf,
+      maintainers: ["Cory O'Daniel"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/coryodaniel/k8s_conf"
+      }
     ]
   end
 end
