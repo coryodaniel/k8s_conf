@@ -34,9 +34,10 @@ defmodule K8s.Conf do
   """
   @spec from_file(binary, keyword) :: K8s.Conf.t()
   def from_file(config_file, opts \\ []) do
-    config = YamlElixir.read_from_file!(config_file)
-    base_path = config_file |> Path.absname() |> Path.dirname()
+    abs_config_file = Path.expand(config_file)
+    base_path = Path.dirname(abs_config_file)
 
+    config = YamlElixir.read_from_file!(abs_config_file)
     context_name = opts[:context] || config["current-context"]
     context = find_by_name(config["contexts"], context_name, "context")
 
