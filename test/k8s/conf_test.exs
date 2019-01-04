@@ -6,14 +6,6 @@ defmodule K8s.ConfTest do
   alias K8s.Conf.RequestOptions
 
   describe "from_file/2" do
-    test "expands a file in a home directory" do
-      config = Conf.from_file("~/.kube/config")
-      assert %Certificate{} = config.auth
-      assert config.url == "https://localhost:6443"
-      assert config.cluster_name == "docker-for-desktop-cluster"
-      assert config.user_name == "docker-for-desktop"
-    end
-
     test "parses a configuration file" do
       config = Conf.from_file("test/support/kube-config.yaml")
       assert %Certificate{} = config.auth
