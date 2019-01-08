@@ -14,6 +14,16 @@ defmodule K8s.ConfTest do
       assert config.user_name == "docker-for-desktop"
     end
 
+    test "using an alternate cluster: cluster-with-cert-data" do
+      config = Conf.from_file("test/support/kube-config.yaml", cluster: "cluster-with-cert-data")
+      assert %Certificate{} = config.auth
+      assert config.url == "https://123.123.123.123"
+      assert config.cluster_name == "cluster-with-cert-data"
+      assert config.ca_cert
+      assert config.auth.certificate
+      assert config.auth.key
+    end
+
     test "using an alternate cluster" do
       config = Conf.from_file("test/support/kube-config.yaml", cluster: "cert-cluster")
       assert %Certificate{} = config.auth

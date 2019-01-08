@@ -17,7 +17,7 @@ defmodule K8s.Conf.PKI do
   Reads the certificate from PEM file or base64 encoding
   """
   @spec cert_from_map(map(), String.t()) :: binary
-  def cert_from_map(%{"certificate-authority-data" => data}, _), do: PKI.cert_from_pem(data)
+  def cert_from_map(%{"certificate-authority-data" => data}, _) when not is_nil(data), do: PKI.cert_from_base64(data)
 
   def cert_from_map(%{"certificate-authority" => file_name}, base_path) do
     file_name
