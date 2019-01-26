@@ -1,5 +1,7 @@
 # K8s.Conf
 
+K8s.Conf is **deprecated** and has been merged into [`k8s` elixir client](https://github.com/coryodaniel/k8s).
+
 [K8s.Conf](https://hexdocs.pm/k8s_conf/readme.html) parses Kubernetes config files and generates HTTP headers and options for authenticating to the Kubernetes API.
 
 [![Build Status](https://travis-ci.org/coryodaniel/k8s_conf.svg?branch=master)](https://travis-ci.org/coryodaniel/k8s_conf)
